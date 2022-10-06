@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Máy tính online</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="view/assets/css/style.css">
+    <script src="view/assets/js/jquery-3.6.1.js"></script>
+    <script src="view/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="view/assets/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container" id="calculator">
+    <div class="row">
+        <div class="col-md-6 d-flex justify-content-center">
+            <div action="calculate" class="calculator">
+                <input id="display" type="text" placeholder="Type Input Here">
+                <div id="calculator-btn">
+                    <div class="row">
+                        <!--Row 1-->
+                        <a class="num btn btn-outline-dark">(</a>
+                        <a class="num btn btn-outline-dark">)</a>
+                        <a class="backspace-btn btn btn-outline-dark">D</a>
+                        <a class="del-btn btn btn-danger">C</a>
+                        <!--Row 2-->
+                    </div>
+                    <div class="row">
+                        <!--Row 1-->
+                        <a class="num btn btn-outline-dark">7</a>
+                        <a class="num btn btn-outline-dark">8</a>
+                        <a class="num btn btn-outline-dark">9</a>
+                        <a class="op btn btn-outline-info">/</a>
+                        <!--Row 2-->
+                    </div>
+                    <div class="row">
+                        <a class="num btn btn-outline-dark">4</a>
+                        <a class="num btn btn-outline-dark">5</a>
+                        <a class="num btn btn-outline-dark">6</a>
+                        <a class="op btn btn-outline-info">*</a>
+                    </div>
+                    <div class="row">
+                        <!--Row 3-->
+                        <a class="num btn btn-outline-dark">1</a>
+                        <a class="num btn btn-outline-dark">2</a>
+                        <a class="num btn btn-outline-dark">3</a>
+                        <a class="op btn btn-outline-info">-</a>
+                    </div>
+                    <div class="row">
+                        <a class="num btn btn-outline-dark">0</a>
+                        <a class="btn btn-outline-info">.</a>
+                        <a class="result-btn btn btn-success">=</a>
+                        <a class="op btn btn-outline-info">+</a>
+                    </div>
+                    <!--Row 4-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+</div>
+
+<script>
+
+    function getDataToServer() {
+        let infix_str = $('#display').val();
+        $.get("calculate", {infix: infix_str}, function (response) {
+            if(response == null){
+                $("#display").val("Expression Error Syntax")
+            }else
+            $("#display").val(response);
+        })
+    }
+
+    function clearDisplay() {
+        $('#display').val("");
+    }
+
+    function backSpaceDisplay() {
+        let str = $('#display').val();
+        $('#display').val(str.slice(0, -1));
+    }
+
+    $(document).ready(function () {
+        $('.num,.op').click(function (e) {
+            let $button = $(this);
+            $('#display').val($('#display').val() + $button.text());
+        })
+        $('.del-btn').click(function (e) {
+            clearDisplay();
+        })
+        $('.result-btn').click(function (e) {
+            getDataToServer();
+        })
+        $('.backspace-btn').click(function (e) {
+            backSpaceDisplay();
+        })
+    })
+    $(document).keydown(function (e) {
+        let display_str = $('#display').val();
+        switch (e.keyCode) {
+            case 8:
+                backSpaceDisplay()
+                break;
+            case 13:
+                getDataToServer()
+                break;
+            case 46:
+                clearDisplay()
+                break;
+            default:
+                if ((e.keyCode >= 48 && e.keyCode <= 57)
+                    || (e.keyCode >= 96 && e.keyCode <= 111)
+                    || (e.keyCode >= 187 && e.keyCode <= 191)) {
+                    $('#display').val($('#display').val() + e.key);
+                }
+                break;
+        }
+    })
+</script>
+</body>
+</html>
