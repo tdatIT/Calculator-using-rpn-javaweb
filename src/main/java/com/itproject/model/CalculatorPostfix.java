@@ -1,6 +1,7 @@
 package com.itproject.model;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -21,6 +22,7 @@ public class CalculatorPostfix implements ICalculable {
 
     @Override
     public String calculateResult() {
+
         Stack<MathSymbol> _stack = new Stack<>();
         String final_result = "";
         for (MathSymbol object : postfix) {
@@ -30,12 +32,13 @@ public class CalculatorPostfix implements ICalculable {
                 Operand op1 = (Operand) _stack.pop();
                 Operand op2 = (Operand) _stack.pop();
                 Operator opt = (Operator) object;
-                Operand op = calTowVar(op1, op2, opt);
+                Operand op = calTowVar(op2, op1, opt);
                 _stack.push(op);
             }
         }
         final_result = _stack.pop().getValue();
-        return final_result;
+        BigDecimal decimal = new BigDecimal(final_result);
+        return decimal.setScale(2,BigDecimal.ROUND_CEILING).toString();
     }
 
     public Operand calTowVar(Operand op1, Operand op2, Operator opt) {
@@ -47,15 +50,19 @@ public class CalculatorPostfix implements ICalculable {
         switch (opt.getFirstCharacter()) {
             case '+':
                 result = var1 + var2;
+                break;
             case '-':
                 result = var1 - var2;
+                break;
             case '*':
                 result = var1 * var2;
+                break;
             case '/':
                 result = var1 / var2;
+                break;
         }
         bd = new BigDecimal(result);
-        String value = bd.setScale(BigDecimal.ROUND_CEILING).toString();
+        String value = bd.toString();
         return new Operand(value);
     }
 }

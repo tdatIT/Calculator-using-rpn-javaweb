@@ -1,9 +1,6 @@
 package com.itproject.mainApp;
 
-import com.itproject.model.CalculatorInfix;
-import com.itproject.model.CalculatorString;
-import com.itproject.model.MathSymbol;
-import com.itproject.model.Operand;
+import com.itproject.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +21,9 @@ public class MainApp {
         for (MathSymbol object : calculatorInfix.calculateResult()) {
                 System.out.print(object.getValue() +" ");
         }
+
+        CalculatorPostfix calculatorPostfix = new CalculatorPostfix( calculatorInfix.calculateResult());
+        System.out.println("Result:"+calculatorPostfix.calculateResult());
 
 
     }

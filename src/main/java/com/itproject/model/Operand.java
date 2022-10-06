@@ -8,7 +8,7 @@ public class Operand extends MathSymbol {
 
     public float getDecimalValue() {
         if (!value.isEmpty())
-            return Float.valueOf(value);
+            return Float.parseFloat(value);
         return 0;
     }
 
