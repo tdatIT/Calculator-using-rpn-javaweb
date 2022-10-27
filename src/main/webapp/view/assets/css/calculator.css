@@ -47,6 +47,9 @@ button:hover{
     font-size: 18px;
     padding: 25px;
 }
+center{
+    background-color: #16e9f8;
+}
 @keyframes big{
     0%{
         font-size: 18px;
