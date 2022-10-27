@@ -1,9 +1,8 @@
 package com.itproject.controller;
 
+
 import com.google.gson.Gson;
-import com.itproject.model.CalculatorInfix;
-import com.itproject.model.CalculatorPostfix;
-import com.itproject.model.CalculatorString;
+import com.itproject.model.*;
 import com.itproject.variable.RedirectPage;
 
 import javax.servlet.ServletException;
@@ -13,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Queue;
 
 @WebServlet(urlPatterns = RedirectPage.CALCULATE_SERVLET)
 public class Calculate extends HttpServlet {
@@ -39,11 +40,16 @@ public class Calculate extends HttpServlet {
     }
 
     private String calculate(String expr) {
+        //Process: String -> List<MathSymbol>
         CalculatorString calStr = new CalculatorString(expr);
-        CalculatorInfix calInf = new CalculatorInfix(calStr.calculateResult());
-        CalculatorPostfix calPost = new CalculatorPostfix(calInf.calculateResult());
-
-        String result = calPost.calculateResult();
+        List<MathSymbol> lst_math = calStr.calculateResult();
+        //Process: List<MathSymbol> -> Queue<MathSymbol>
+        CalculatorInfix calInf = new CalculatorInfix(lst_math);
+        Queue<MathSymbol>infix = calInf.calculateResult();
+        //Process: Queue<MathSymbol> -> Result + String postfix
+        CalculatorPostfix calPost = new CalculatorPostfix(infix);
+        String postfix_str = new CalculatorList(infix).calculateResult();
+        String result = calPost.calculateResult() +"/"+postfix_str ;
         return result;
     }
 }

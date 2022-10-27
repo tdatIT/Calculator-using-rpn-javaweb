@@ -1,5 +1,6 @@
 package com.itproject.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,4 +48,5 @@ public class CalculatorString implements ICalculable {
         }
         return list;
     }
+
 }

@@ -22,7 +22,7 @@ public class CalculatorInfix implements ICalculable {
     }
 
     @Override
-    public Queue<MathSymbol> calculateResult() {
+    public Queue<MathSymbol>calculateResult() {
         Queue<MathSymbol> _queue = new LinkedList<MathSymbol>();
         Stack<MathSymbol> _stack = new Stack<MathSymbol>();
 

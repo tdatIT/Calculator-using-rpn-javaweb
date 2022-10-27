@@ -54,26 +54,26 @@
     const output = document.querySelector(".output_postfix");
 
     //eventlistener
-    keys.forEach(key=>{
-        key.addEventListener("click",cal);
+    keys.forEach(key => {
+        key.addEventListener("click", cal);
     });
 
-    function cal(){
+    function cal() {
         let buttonText = this.innerText;
-        if(buttonText === "AC"){
+        if (buttonText === "AC") {
             input.innerText = "";
-            output.innerText="";
+            output.innerText = "";
             result.innerText = "0";
             result.style.animation = "";
             input.style.animation = "";
             return;
         }
-        if(buttonText === "DEL"){
-            input.textContent = input.textContent.substr(0,input.textContent.length-1);
-            output.textContent = output.textContent.substr(0,output.textContent.length-1);
+        if (buttonText === "DEL") {
+            input.textContent = input.textContent.substr(0, input.textContent.length - 1);
+            output.textContent = output.textContent.substr(0, output.textContent.length - 1);
             return;
         }
-        if(buttonText === "="){
+        if (buttonText === "=") {
             //result.innerText = etext(output.innerText);
             result.style.animation = "big 0.5s ease-in-out";
             input.style.animation = "big 0.5s ease-in-out";
@@ -82,21 +82,23 @@
             input.style.animationFillMode = "forwards";
             output.style.animationFillMode = "forwards";
 
-        }
-        else{
+        } else {
             input.textContent += buttonText;
             return;
         }
 
     }
+
     function getDataToServer() {
         let infix_str = $('.input').text();
         $.post("calculate", {infix: infix_str}, function (response) {
-            if(response == null){
+            const result_arr = response.split('/');
+            if (result_arr[0]==='null') {
                 $(".result").text("Expression Error Syntax")
-            }else{
-                $(".output_postfix").text($(".input").text());
-                $(".result").text(response);
+                $(".output_postfix").text("");
+            } else {
+                $(".result").text(result_arr[0]);
+                $(".output_postfix").text(result_arr[1]);
             }
 
         })

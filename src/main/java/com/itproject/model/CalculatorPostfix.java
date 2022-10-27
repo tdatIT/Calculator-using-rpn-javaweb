@@ -1,6 +1,7 @@
 package com.itproject.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -63,6 +64,8 @@ public class CalculatorPostfix implements ICalculable {
             case '/':
                 result = var1 / var2;
                 break;
+            case '^':
+                result = (float)Math.pow(var1,var2);
         }
         bd = new BigDecimal(result);
         String value = bd.toString();
