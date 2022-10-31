@@ -1,6 +1,5 @@
 package com.itproject.model;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class CalculatorString implements ICalculable {
         try {
             for (int i = 0; i < expression.length(); i++) {
                 char ch = expression.charAt(i);
-                if (ch >= '0' && ch <= '9') {
+                if (ch >= '0' && ch <= '9' || ch == '.') {
                     token += ch;
                 } else {
                     if (!token.equals("")) {
@@ -35,7 +34,7 @@ public class CalculatorString implements ICalculable {
                         list.add(operand);
                         token = "";
                     }
-                    list.add(factory.createObject(ch+""));
+                    list.add(factory.createObject(ch + ""));
                 }
             }
             if (!token.equals("")) {

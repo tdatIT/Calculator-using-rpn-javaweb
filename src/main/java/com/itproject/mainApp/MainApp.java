@@ -8,7 +8,7 @@ import java.util.List;
 public class MainApp {
     public static void main(String args[]) {
         List<MathSymbol> list = new ArrayList<MathSymbol>();
-        String infix = "(12*(24+4)/4)+22/242";
+        String infix = "1.2 * 4";
         CalculatorString calculator = new CalculatorString(infix);
         for (MathSymbol object : calculator.calculateResult()) {
             if (object.getClass() == Operand.class) {
