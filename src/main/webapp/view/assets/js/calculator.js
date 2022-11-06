@@ -2,8 +2,8 @@
 const input = document.querySelector(".input");
 const result = document.querySelector(".result");
 const keys = document.querySelectorAll("button");
+const display = document.querySelector(".display");
 const output = document.querySelector(".output_postfix");
-
 //eventlistener
 keys.forEach(key => {
     key.addEventListener("click", cal);
@@ -17,21 +17,30 @@ function cal() {
         result.innerText = "0";
         result.style.animation = "";
         input.style.animation = "";
+        display.style.height = "35vh";
         return;
     }
     if (buttonText === "DEL") {
         input.textContent = input.textContent.substr(0, input.textContent.length - 1);
         output.textContent = output.textContent.substr(0, output.textContent.length - 1);
+        if(input.textContent.toString().length <= 24){
+            //alert(input.textContent.toString().length);
+            display.style.height = "35vh";
+        }
         return;
     }
     if (buttonText === "=") {
+        if(input.textContent.toString().length > 24){
+            //alert(input.textContent.toString().length);
+            display.style.height = "43vh";
+        }
         //result.innerText = eval(output.innerText);
         result.style.animation = "big 0.5s ease-in-out";
         input.style.animation = "big 0.5s ease-in-out";
         //output.style.animation = "big 0.5s ease-in-out";
         result.style.animationFillMode = "forwards";
         input.style.animationFillMode = "forwards";
-        output.style.animationFillMode = "forwards";
+        //output.style.animationFillMode = "forwards";
 
     } else {
         input.textContent += buttonText;
@@ -48,6 +57,7 @@ function getDataToServer() {
             $(".result").text("Expression Error Syntax")
             $(".output_postfix").text("");
         } else {
+            $(".postfix").text("Postfix: "+ result_arr[1]);
             $(".result").text(result_arr[0]);
             $(".output_postfix").text(result_arr[1]);
         }
