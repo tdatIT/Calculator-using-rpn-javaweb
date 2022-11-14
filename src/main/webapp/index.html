@@ -45,14 +45,39 @@
         </div>
 
     </div>
-    <p id="footer"><center>RPN-Calculator by Trần Tiến Đạt and Lê Hải</center></p>
+    <p id="footer">
+    <center>RPN-Calculator by Trần Tiến Đạt and Lê Hải</center>
+    </p>
 </div>
 <div class="note">
-    <textarea class="postfix">Postfix:</textarea>
+    <textarea class="postfix" disabled>Postfix:</textarea>
     <div class="content">
-        <h1><center>Nội dung </center></h1>
-        <p>Reverse Polish Notation (ký pháp nghịch đảo Ba Lan) là một loại ký pháp toán học dùng để biểu thị biểu thức đại số,
-            rất thuận lợi trong giải thuật tính giá trị biểu thức, có nghĩa là </p>
+        <h1>
+            <center>Nội dung</center>
+        </h1>
+        <p>Hướng dẫn sử dụng
+            <br>- AC: Xóa phép tính cũ, DEL (Backspace): Xóa ký tự, = (Enter): Tính kết quả, NUM 1-9: Nhập số.
+            <br>- VD: (-24+2)/34*(34+3+93)-43/2
+        </p>
+        <p>Reverse Polish Notation (ký pháp nghịch đảo Ba Lan) là một loại ký pháp toán học dùng để biểu thị biểu thức
+            đại số,
+            rất thuận lợi trong giải thuật tính giá trị biểu thức. Reserve Polish Notation (RPN) hay còn biết đến là
+            reverse Łukasiewicz notation
+            được phát minh vào thập kỷ 1950 bởi Charles Hambmin, công bố vào năm 1962.<br>
+
+            - Đầu tiên có hai khái niệm:<br>
+            + Infix (Trung tố): Toán tử sẽ nằm giữa hai toán hạng (VD: a+b)<br>
+            + Postfix (Hậu tố): Các toán tử sẽ được đặt sau toán hạng (VD: a+b -> a b +)<br>
+            - Để tính toán biểu thức infix dùng RPN trải qua hai giai đoạn<br>
+            + Giai đoạn 1: Dùng RPN chuyển từ infix -> postfix (phân tích).<br>
+            + Giai đoạn 2: Tính biểu thức dạng postfix (tính toán)<br>
+        </p>
+
+        <p>Ứng dụng được thực hiện dựa trên thuật toán trên chức năng chính gồm có:
+            <br>- Các phép toán +,-,*,/,dấu () để biểu diễn độ ưu tiên
+        </p>
+        <p>Source Code <a href="https://github.com/tdatIT/Calculator-using-rpn-javaweb.git">Github</a></p>
+
     </div>
 </div>
 <script src="view/assets/js/jquery-3.6.1.js"></script>

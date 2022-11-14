@@ -7,9 +7,9 @@ public class MathSymbolFactory {
         char ch = value.charAt(0);
         if (ch >= '0' && ch <= '9') {
             object = new Operand(value);
-        } else if (ch == '+' || ch == '-' || ch == '/'
-                || ch == '*' || ch == '(' || ch == ')'
-                || ch == '^') {
+        } else if (ch == '-' && value.length() >= 2) {
+            object = new Operand(value);
+        } else {
             object = new Operator(value);
         }
         return object;

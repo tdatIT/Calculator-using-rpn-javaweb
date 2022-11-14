@@ -52,7 +52,7 @@ function cal() {
 function getDataToServer() {
     let infix_str = $('.input').text();
     $.post("calculate", {infix: infix_str}, function (response) {
-        const result_arr = response.split('/');
+        const result_arr = response.split(';');
         if (result_arr[0] === 'null') {
             $(".result").text("Expression Error Syntax")
             $(".output_postfix").text("");

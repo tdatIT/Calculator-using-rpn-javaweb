@@ -8,6 +8,6 @@ public class RedirectPage {
     //Servlet name
     public static final String HOME_SERVLET = "/home";
     public static final String CALCULATE_SERVLET = "/calculate";
-    public static final String ERROR404_SERVLET = "/error-404";
+    public static final String ERROR_404 = "/error-404";
 
 }
