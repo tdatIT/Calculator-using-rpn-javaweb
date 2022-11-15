@@ -49,7 +49,7 @@ public class Calculate extends HttpServlet {
         //Process: Queue<MathSymbol> -> Result + String postfix
         CalculatorPostfix calPost = new CalculatorPostfix(infix);
         String postfix_str = new CalculatorList(infix).calculateResult();
-        String result = calPost.calculateResult() +" / "+postfix_str ;
+        String result = calPost.calculateResult() +";"+postfix_str ;
         return result;
     }
 }
