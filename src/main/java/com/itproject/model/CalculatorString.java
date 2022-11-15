@@ -57,10 +57,10 @@ public class CalculatorString implements ICalculable {
     }
 
     boolean checkNegative(MathSymbol symbol) {
-        if (symbol.getClass() == Operator.class && symbol.getTypeBracket() == MathSymbol.OPEN_BRACKET)
+        if (symbol.getTypeBracket() != MathSymbol.CLOSED_BRACKET
+                && symbol.getClass() != Operand.class)
             return true;
-        else
-            return false;
+        return false;
     }
 
 }
