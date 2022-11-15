@@ -3,7 +3,6 @@ const input = document.querySelector(".input");
 const result = document.querySelector(".result");
 const keys = document.querySelectorAll("button");
 const display = document.querySelector(".display");
-const output = document.querySelector(".output_postfix");
 //eventlistener
 keys.forEach(key => {
     key.addEventListener("click", cal);
@@ -13,16 +12,14 @@ function cal() {
     let buttonText = this.innerText;
     if (buttonText === "AC") {
         input.innerText = "";
-        output.innerText = "";
         result.innerText = "0";
         result.style.animation = "";
         input.style.animation = "";
-        display.style.height = "35vh";
+        display.style.height = "30vh";
         return;
     }
     if (buttonText === "DEL") {
         input.textContent = input.textContent.substr(0, input.textContent.length - 1);
-        output.textContent = output.textContent.substr(0, output.textContent.length - 1);
         if(input.textContent.toString().length <= 24){
             //alert(input.textContent.toString().length);
             display.style.height = "35vh";
@@ -32,7 +29,7 @@ function cal() {
     if (buttonText === "=") {
         if(input.textContent.toString().length > 24){
             //alert(input.textContent.toString().length);
-            display.style.height = "43vh";
+            display.style.height = "38vh";
         }
         //result.innerText = eval(output.innerText);
         result.style.animation = "big 0.5s ease-in-out";
@@ -54,12 +51,11 @@ function getDataToServer() {
     $.post("calculate", {infix: infix_str}, function (response) {
         const result_arr = response.split(';');
         if (result_arr[0] === 'null') {
-            $(".result").text("Expression Error Syntax")
-            $(".output_postfix").text("");
+            $(".result").text("Expression Error Syntax");
+            $(".postfix").text("Postfix: Expression Error Syntax");
         } else {
             $(".postfix").text("Postfix: "+ result_arr[1]);
             $(".result").text(result_arr[0]);
-            $(".output_postfix").text(result_arr[1]);
         }
 
     })
