@@ -34,7 +34,15 @@ public class CalculatorString implements ICalculable {
                         list.add(operand);
                         token = "";
                     }
-                    list.add(factory.createObject(ch + ""));
+                    boolean check;
+                    if (list.isEmpty())
+                        check = true;
+                    else
+                        check = checkNegative(list.get(list.size() - 1));
+                    if (ch == '-' && check == true)
+                        token += ch;
+                    else
+                        list.add(factory.createObject(ch + ""));
                 }
             }
             if (!token.equals("")) {
@@ -46,6 +54,13 @@ public class CalculatorString implements ICalculable {
             e.printStackTrace();
         }
         return list;
+    }
+
+    boolean checkNegative(MathSymbol symbol) {
+        if (symbol.getClass() == Operator.class && symbol.getTypeBracket() == MathSymbol.OPEN_BRACKET)
+            return true;
+        else
+            return false;
     }
 
 }
